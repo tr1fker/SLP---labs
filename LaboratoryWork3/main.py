@@ -197,7 +197,9 @@ def fourth_task():
             print(new_list)
         with open("Documents_task_4/result.json", "w", encoding="utf-8") as json_file:
             json.dump(new_list, json_file, ensure_ascii=False, indent=4)
-
+        print("----------------\n"
+              "Успешная запись(.json)!\n"
+              "----------------")
 
 
 
