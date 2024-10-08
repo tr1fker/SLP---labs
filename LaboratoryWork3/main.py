@@ -1,25 +1,4 @@
-import sys
-
-
-# 4. Создать вручную и заполнить несколькими строками текстовый
-# файл, в котором каждая строка будет содержать данные о фирме: название,
-# форма собственности, выручка, издержки.
-# Пример строки файла: firm_1 ООО 10000 5000.
-# Необходимо построчно прочитать файл, вычислить прибыль каждой
-# компании, а также среднюю прибыль. Если фирма получила убытки, в расчёт
-# средней прибыли её не включать.
-# Далее реализовать список. Он должен содержать словарь с фирмами и
-# их прибылями, а также словарь со средней прибылью. Если фирма получила
-# убытки, также добавить её в словарь (со значением убытков).
-# Пример списка: [{“firm_1”: 5000, “firm_2”: 3000, “firm_3”: 1000},
-# {“average_profit”: 2000}].
-# Итоговый список сохранить в виде json-объекта в соответствующий
-# файл.
-# Пример json-объекта:
-# [{"firm_1": 5000, "firm_2": 3000, "firm_3": 1000}, {"average_profit":
-# 2000}]
-# Подсказка: использовать менеджер контекста. – 1 балл (задача на
-# оценку 10)
+import json
 
 
 def first_task():
@@ -135,9 +114,9 @@ def third_task():
                     number_lectures = input_integer_min("Введите кол-во лекций по предмету '" + name_subject + "':", 0)
                 line = name_subject + ": " + str(number_lectures) + "(л) " + str(number_practise_works) + "(пр) " + str(number_laboratory_works) + "(лаб)\n"
                 file_subjects.write(line)
-                print("----------------\n"
-                      "Успешная запись!\n"
-                      "----------------")
+            print("----------------\n"
+                  "Успешная запись!\n"
+                  "----------------")
     with open("Documents_task_3/subjects.txt", "r", encoding="utf-8") as file_subjects:
         subjects_dict = {}
         lines = file_subjects.readlines()
@@ -157,7 +136,71 @@ def third_task():
 
 
 def fourth_task():
-    pass
+    print("""---------------------------------------------------------------------
+    Создать вручную и заполнить несколькими строками текстовый файл,
+в котором каждая строка будет содержать данные о фирме: название,
+форма собственности, выручка, издержки.
+Пример строки файла: firm_1 ООО 10000 5000.
+Необходимо построчно прочитать файл, вычислить прибыль каждой
+компании, а также среднюю прибыль. Если фирма получила убытки, в
+расчёт средней прибыли её не включать. Далее реализовать список. Он
+должен содержать словарь с фирмами и их прибылями, а также словарь
+со средней прибылью. Если фирма получила убытки, также добавить её в
+словарь (со значением убытков).
+Пример списка: [{“firm_1”: 5000, “firm_2”: 3000, “firm_3”: 1000},
+{“average_profit”: 2000}].
+Итоговый список сохранить в виде json-объекта в соответствующий файл.
+Пример json-объекта: [{"firm_1": 5000, "firm_2": 3000,
+"firm_3": 1000}, {"average_profit": 2000}]
+Подсказка: использовать менеджер контекста. – 1 балл (задача на оценку 10)
+---------------------------------------------------------------------""")
+    with open("Documents_task_4/firms.txt", "w", encoding="utf-8") as file_firms:
+        number = None
+        while not number:
+            number = input_integer_min("Введите кол-во фирм(0 - выход):", 0)
+        if number == 0:
+            print("---------------\n"
+                  "Успешный выход!")
+        else:
+            for _firm in range(number):
+                name_firm = input(f"Введите название фирмы #{_firm + 1}:")
+                name_form_ownership = input("Введите форму собственности:")
+                revenue = None
+                while not revenue:
+                    revenue = input_integer_min("Введите выручку компании:", 0)
+                costs = None
+                while not costs:
+                    costs = input_integer_min("Введите издержку компани:", 0)
+                file_firms.write(name_firm + ": " + name_form_ownership + " " + str(revenue) + " " + str(costs) + "\n")
+            print("----------------\n"
+                  "Успешная запись!\n"
+                  "----------------")
+    with open("Documents_task_4/firms.txt", "r", encoding="utf-8") as file_firms:
+        lines = file_firms.readlines()
+        sum_salaries = 0
+        count_sum_salaries = 0
+        new_list = [dict()]
+        for line in lines:
+            name_firm, numbers = line.split(':')
+            name_form_ownership, revenue, costs = numbers.split()
+            revenue = int(revenue)
+            costs = int(costs)
+            salary = revenue - costs
+            if salary >= 0:
+                count_sum_salaries += 1
+                sum_salaries += salary
+            new_list[0][name_firm] = salary
+        if count_sum_salaries == 0:
+            print("Нет компаний с прибылью!")
+        else:
+            new_list.append({"average_profit":sum_salaries})
+            print(new_list)
+        with open("Documents_task_4/result.json", "w", encoding="utf-8") as json_file:
+            json.dump(new_list, json_file, ensure_ascii=False, indent=4)
+
+
+
+
 
 def input_float(CONDITION_INPUT_INTEGER):
     try:
