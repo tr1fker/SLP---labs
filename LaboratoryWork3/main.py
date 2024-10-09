@@ -247,6 +247,7 @@ MENU_TEXT = ("-----------------------------------\n"
              "Введите №(1-4) задача, '0' - выход:")
 
 
+
 def main():
     program_is_work = True
     while (program_is_work):
