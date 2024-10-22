@@ -1,7 +1,3 @@
-# Задание 2:
-# Требуется написать программу, которая вычисляет общую площадь стены
-# комнаты, которую необходимо оклеить обоями. При этом окна, двери, пол и
-# потолок оклеивать не нужно. – 3 балла
 # Задание 3:
 # Создать классы Circle (круг), Square (квадрат), Rectangle (прямоугольник) для
 # описания плоских геометрических фигур. Переопределить метод нахождения
@@ -52,10 +48,10 @@ class Triangle:
         first_side = while_input_integer("Введите 1-ую сторону треугольника:", 1)
         self.a = first_side
     def input_second_side(self):
-        second_side = while_input_integer("Введите 1-ую сторону треугольника:", 1)
+        second_side = while_input_integer("Введите 2-ую сторону треугольника:", 1)
         self.b = second_side
     def input_third_side(self):
-        third_side = while_input_integer("Введите 1-ую сторону треугольника:", 1)
+        third_side = while_input_integer("Введите 3-ю сторону треугольника:", 1)
         self.c = third_side
     def get_square(self):
         if not self.is_instance():
@@ -71,10 +67,10 @@ def first_task():
 # Второй метод : нахождение площади треугольника. Третий метод:
 # нахождение периметра треугольника. – 1 балл
 ----------------------------------------------------------------------""")
-    first_task_work = True
+    task_is_work = True
     triangle = Triangle(0, 0, 0)
     first_size, second_side, third_side = 0, 0, 0
-    while first_task_work:
+    while task_is_work:
         number = while_input_integer("+---------------------------------------+\n\
 |                  Меню                 |\n\
 +---------------------------------------+\n\
@@ -105,11 +101,101 @@ def first_task():
             if perimeter != 0:
                 print("Периметр треугольника:", perimeter)
         else:
-            first_task_work = False
+            task_is_work = False
 
 
+class Room:
+    width, height, length = 0, 0, 0
+    count_windows, height_window, width_window = 0, 0, 0
+    count_doors, height_door, width_door = 0, 0, 0
+    def __init__(self, width = 0, height = 0, length = 0):
+        self.width, self.height, self.length = width, height, length
+    def input_width(self):
+        width = while_input_integer("Введите ширину комнаты:", 1)
+        self.width = width
+    def input_height(self):
+        height = while_input_integer("Введите высоту комнаты:", 1)
+        self.height = height
+    def input_length(self):
+        length = while_input_integer("Введите длину комнаты:", 1)
+        self.length = length
+    def get_square_wall(self):
+        square_doors = self.count_doors * self.height_door * self.width_door
+        square_windows = self.count_windows * self.height_window * self.width_window
+        square_walls = (self.width + self.length) * self.height * 2
+        return square_walls - square_doors - square_windows
+    def input_count_windows(self):
+        count_windows = while_input_integer("Введите кол-во окон:", 0)
+        self.count_windows = count_windows
+    def input_width_window(self):
+        width_window = while_input_integer("Введите ширину окна:", 1)
+        self.width_window = width_window
+    def input_height_window(self):
+        heigth_windows = while_input_integer("Введите высоту окна:", 1)
+        self.height_window = heigth_windows
+    def input_count_doors(self):
+        count_doors = while_input_integer("Введите кол-во дверей:", 0)
+        self.count_doors = count_doors
+    def input_width_door(self):
+        width_door = while_input_integer("Введите ширину двери:", 1)
+        self.width_door = width_door
+    def input_height_door(self):
+        heigth_door = while_input_integer("Введите высоту двери:", 1)
+        self.height_door = heigth_door
 def second_task():
-    pass
+    print("""-------------------------------------------------------------------------
+# Задание 2:
+# Требуется написать программу, которая вычисляет общую площадь стены
+# комнаты, которую необходимо оклеить обоями. При этом окна, двери, пол и
+# потолок оклеивать не нужно. – 3 балла
+-------------------------------------------------------------------------""")
+    task_is_work = True
+    room = Room()
+    while task_is_work:
+        number = while_input_integer("+---------------------------------+\n\
+|              Меню               |\n\
++---------------------------------+\n\
+|1. Ввести ширину комнаты         |\n\
+|2. Ввести высоту комнаты         |\n\
+|3. Ввести длину комнаты          |\n\
+|4. Ввести кол-во окон            |\n\
+|5. Ввести ширину окон            |\n\
+|6. Ввести высоту окон            |\n\
+|7. Ввести кол-во дверей          |\n\
+|8. Ввести ширину дверей          |\n\
+|9. Ввести высоту дверей          |\n\
+|10. Узнать свободную площадь стен|\n\
++---------------------------------+\n\
+|0. Выход                         |\n\
++---------------------------------+\n\
+Введите значение:", 0, 10)
+        if number == 1:
+            room.input_width()
+        elif number == 2:
+            room.input_height()
+        elif number == 3:
+            room.input_length()
+        elif number == 4:
+            room.input_count_windows()
+        elif number == 5:
+            room.input_width_window()
+        elif number == 6:
+            room.input_height_window()
+        elif number == 7:
+            room.input_count_doors()
+        elif number == 8:
+            room.input_width_door()
+        elif number == 9:
+            room.input_height_door()
+        elif number == 10:
+            square = room.get_square_wall()
+            if square > 0:
+                print("Площадь:", square)
+            else:
+                print("Неверно указаны данные!")
+        else:
+            task_is_work = False
+
 def third_task():
     pass
 def fourth_task():
