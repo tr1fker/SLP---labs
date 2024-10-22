@@ -1,6 +1,3 @@
-# Задание 4:
-# Придумать класс самостоятельно, реализовать в нем методы экземпляра
-# класса, статические, методы, методы класса. – 1 – 3 балла
 import math
 import sys
 
@@ -315,8 +312,52 @@ def third_task():
                     rectangle_is_work = False
         else:
             task_is_work = False
+
+class Car:
+    name, fuel = "name_car", 0
+    def input_name(self):
+        self.name = input("Введите название машины:")
+    def input_fuel(self):
+        self.fuel = while_input_integer("Введите кол-во топлива:", 0)
+    def __init__(self):
+        self.input_name()
+        self.input_fuel()
+    def print_information(self):
+        print(f"Name car:{self.name}\nFuel:{self.fuel}")
+    @staticmethod
+    def print_beep():
+        print("Beep!BeeEEep!Beeeep!")
+
 def fourth_task():
-    pass
+    print("""---------------------------------------------------------------------
+# Задание 4:
+# Придумать класс самостоятельно, реализовать в нем методы экземпляра
+# класса, статические, методы, методы класса. – 1 – 3 балла
+---------------------------------------------------------------------""")
+    task_is_work = True
+    car = Car()
+    while task_is_work:
+        number = while_input_integer("+--------------------------+\n\
+|           Меню           |\n\
++--------------------------+\n\
+|1. Изменить название      |\n\
+|2. Изменить кол-во топлива|\n\
+|3. Получить информацию    |\n\
+|4. StaticMethod           |\n\
++--------------------------+\n\
+|0. Выход                  |\n\
++--------------------------+\n\
+Введите значение!", 0, 4)
+        if number == 1:
+            car.input_name()
+        elif number == 2:
+            car.input_fuel()
+        elif number == 3:
+            car.print_information()
+        elif number == 4:
+            car.print_beep()
+        else:
+            task_is_work = False
 
 def main():
     program_is_work = True
