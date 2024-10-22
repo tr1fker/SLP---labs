@@ -1,7 +1,3 @@
-# Задание 3:
-# Создать классы Circle (круг), Square (квадрат), Rectangle (прямоугольник) для
-# описания плоских геометрических фигур. Переопределить метод нахождения
-# площади фигуры. – 3 балла
 # Задание 4:
 # Придумать класс самостоятельно, реализовать в нем методы экземпляра
 # класса, статические, методы, методы класса. – 1 – 3 балла
@@ -196,8 +192,129 @@ def second_task():
         else:
             task_is_work = False
 
+class Shape:
+    def get_square(self):
+        print("Площадь равна nil!")
+class Circle(Shape):
+    radius = 0
+    def __init__(self, radius = 0):
+        self.radius = radius
+    def input_radius(self):
+        radius = while_input_integer("Введите радиус круга:", 1)
+        self.radius = radius
+    def print_square(self):
+        if self.radius == 0:
+            print("Введите радиус!")
+        else:
+            print("Площадь круга:", 2 * math.pi * pow(self.radius, 2))
+class Rectangle(Shape):
+    a, b = 0, 0
+    def __init__(self, a = 0, b = 0):
+        self.a, self.b = a, b
+    def input_a(self):
+        a = while_input_integer("Введите сторону a:", 1)
+        self.a = a
+    def input_b(self):
+        b = while_input_integer("Введите сторону b:", 1)
+        self.b = b
+    def print_square(self):
+        if self.a == 0 or self.b == 0:
+            print("Введите все стороны!")
+        else:
+            print("Площадь :", self.a * self.b)
+class Square(Shape):
+    a = 0
+    def __init__(self, a = 0):
+        self.a = a
+    def input_a(self):
+        a = while_input_integer("Введите сторону:", 1)
+        self.a = a
+    def print_square(self):
+        if self.a == 0:
+            print("Введите сторону!")
+        else:
+            print("Площадь :", pow(self.a, 2))
 def third_task():
-    pass
+    print("""-------------------------------------------------------------------------------    
+# Задание 3:
+# Создать классы Circle (круг), Square (квадрат), Rectangle (прямоугольник) для
+# описания плоских геометрических фигур. Переопределить метод нахождения
+# площади фигуры. – 3 балла
+-------------------------------------------------------------------------------""")
+    task_is_work = True
+    while task_is_work:
+        number = while_input_integer("+------------------------+\n\
+|         Меню           |\n\
++------------------------+\n\
+|1. Создать круг         |\n\
+|2. Создать квадрат      |\n\
+|3. Создать прямоугольник|\n\
++------------------------+\n\
+|0. Выход                |\n\
++------------------------+\n\
+Введите значение:", 0, 3)
+        if number == 1:
+            circle = Circle()
+            circle_is_work = True
+            while circle_is_work:
+                number = while_input_integer("+-------------------+\n\
+|       Круг        |\n\
++-------------------+\n\
+|1. Ввести радиус   |\n\
+|2. Получить площадь|\n\
++-------------------+\n\
+|0. Выход           |\n\
++-------------------+\n\
+Введите значение:", 0, 2)
+            if number == 1:
+                circle.input_radius()
+            elif number == 2:
+                circle.print_square()
+            else:
+                circle_is_work = False
+        elif number == 2:
+            square = Square()
+            square_is_work = True
+            while square_is_work:
+                number = while_input_integer("+-------------------+\n\
+|      Квадрат      |\n\
++-------------------+\n\
+|1. Ввести сторону  |\n\
+|2. Получить площадь|\n\
++-------------------+\n\
+|0. Выход           |\n\
++-------------------+\n\
+Введите значение:", 0, 2)
+                if number == 1:
+                    square.input_a()
+                elif number == 2:
+                    square.print_square()
+                else:
+                    square_is_work = False
+        elif number == 3:
+            rectangle = Rectangle()
+            rectangle_is_work = True
+            while rectangle_is_work:
+                number = while_input_integer("+----------------------+\n\
+|     Прямоугольник    |\n\
++----------------------+\n\
+|1. Ввести 1-ую сторону|\n\
+|2. Ввести 2-ую сторону|\n\
+|3. Получить площадь   |\n\
++----------------------+\n\
+|0. Выход              |\n\
++----------------------+\n\
+Введите значение:", 0, 3)
+                if number == 1:
+                    rectangle.input_a()
+                elif number == 2:
+                    rectangle.input_b()
+                elif number == 3:
+                    rectangle.print_square()
+                else:
+                    rectangle_is_work = False
+        else:
+            task_is_work = False
 def fourth_task():
     pass
 
